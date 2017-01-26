@@ -10,9 +10,32 @@ $(document).ready(function() {
  */
 function initializePage() {
 	$("#testjs").click(function(e) {
-		$('.jumbotron h1').text("Javascript is connected");
+		$('.jumbotron h1').text("OHMERGAD, the js is ON");
+		$("#testjs").text("Please wait...");
+		$(".jumbotron p").addClass("active");
 	});
+
+
+	function projectClick(e){
+		console.log("Project clicked");
+
+		e.preventDefault(); // cancel the default action, which prevents the page from reloading
+	
+		var containingProject = $(this).closest(".project");
+	    var description = $(containingProject).find(".project-description");
+	    if (description.length == 0) {
+	       $(containingProject).append("<div class='project-description'><p>Description of the project.</p></div>");
+	    } else {
+	       //description.html("<p>Stop clicking on me! You just did it at " + (new Date()) + "</p>");
+	       $(containingProject).fadeOut();
+	    }
+	}
+
+	$("a.thumbnail").click(projectClick);   // need this to call the projectClick function!!!
+
+
+
 
 	// Add any additional listeners here
 	// example: $("#div-id").click(functionToCall);
-}
+}// end of initializePage
